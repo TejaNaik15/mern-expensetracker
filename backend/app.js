@@ -15,7 +15,9 @@ mongoose
 
 const corsOptions = {
   origin: ["https://mern-expensetracker-frontend-51n5.onrender.com"],
+  credentials: true,
 };
+
 app.use(cors(corsOptions));
 
 app.use(express.json()); 
