@@ -20,9 +20,9 @@ app.use(cors(corsOptions));
 
 app.use(express.json()); 
 
-app.use("/", userRouter);
-app.use("/", categoryRouter);
-app.use("/", transactionRouter);
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/categories", categoryRouter);
+app.use("/api/v1/transactions", transactionRouter);
 
 app.use(errorHandler);
 
