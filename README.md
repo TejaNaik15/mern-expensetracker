@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center"
   <h1>💰 MERN Expense Tracker</h1>
   <p>
     A full-stack personal expense tracking application built with the MERN stack (MongoDB, Express, React, Node.js).
