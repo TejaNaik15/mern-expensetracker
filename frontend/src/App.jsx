@@ -1,10 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import HeroSection from "./components/Home/HomePage";
+import HomePage from "./components/Home/HomePage";
+import { useSelector } from "react-redux";
 import PublicNavbar from "./components/Navbar/PublicNavbar";
 import LoginForm from "./components/Users/Login";
-import { useSelector } from "react-redux";
 import RegistrationForm from "./components/Users/Register";
-import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 import AddCategory from "./components/Category/AddCategory";
 import CategoriesList from "./components/Category/CategoriesList";
 import UpdateCategory from "./components/Category/UpdateCategory";
@@ -12,17 +11,16 @@ import TransactionForm from "./components/Transactions/TransactionForm";
 import Dashboard from "./components/Users/Dashboard";
 import UserProfile from "./components/Users/UserProfile";
 import AuthRoute from "./components/Auth/AuthRoute";
+import PrivateNavbar from "./components/Navbar/PrivateNavbar";
 
 function App() {
   const user = useSelector((state) => state?.auth?.user);
-
   return (
     <BrowserRouter>
       {/* Navbar */}
-
       {user ? <PrivateNavbar /> : <PublicNavbar />}
       <Routes>
-        <Route path="/" element={<HeroSection />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegistrationForm />} />
         <Route

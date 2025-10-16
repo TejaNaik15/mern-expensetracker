@@ -42,7 +42,7 @@ export default function PrivateNavbar() {
                 </div>
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo */}
-                  <SiAuthy className="h-8 w-auto text-green-500" />
+                  <SiAuthy className="h-8 w-auto text-pink-500" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
                   <Link

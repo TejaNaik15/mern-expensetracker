@@ -1,23 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 const isAuthenticated = async (req, res, next) => {
-  //! Get the token from the header
-  const headerObj = req.headers;
-  const token = headerObj?.authorization?.split(" ")[1];
-  //!Verify the token
-  const verifyToken = jwt.verify(token, "masynctechKey", (err, decoded) => {
-    if (err) {
-      return false;
-    } else {
-      return decoded;
-    }
-  });
-  if (verifyToken) {
-    //!Save the user req obj
-    req.user = verifyToken.id;
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return next(new Error("No token provided or token is not a Bearer token"));
+  }
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.id;
     next();
-  } else {
-    const err = new Error("Token expired, login again");
+  } catch (err) {
+    // Handles expired tokens, invalid signatures, etc.
     next(err);
   }
 };

@@ -65,14 +65,22 @@ const transactionController = {
     }
   }),
   //! delete
-  delete: asyncHandler(async (req, res) => {
-    //! Find the transaction
-    const transaction = await Transaction.findById(req.params.id);
-    if (transaction && transaction.user.toString() === req.user.toString()) {
-      await Transaction.findByIdAndDelete(req.params.id);
-      res.json({ message: "Transaction removed" });
+  deleteTran: async (req, res) => {
+    try {
+      const transaction = await Transaction.findById(req.params.id);
+      if (transaction && transaction.user.toString() === req.user.toString()) {
+        await transaction.deleteOne();
+        res.json({ message: "Transaction removed" });
+      } else {
+        res
+          .status(404)
+          .json({ message: "Transaction not found or user not authorized" });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
     }
-  }),
+  },
 };
+
 
 module.exports = transactionController;

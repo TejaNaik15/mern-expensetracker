@@ -10,23 +10,19 @@ import {
 import { IoIosStats } from "react-icons/io";
 import { FaFilter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Footer from "./Footer"; // <-- Import Footer component
+
 const HeroSection = () => {
   return (
     <>
-      <div className="bg-gradient-to-r from-rose-400 via-pink-500 to-indigo-500 text-white py-20 px-4
-">
+      <div className="bg-gradient-to-r from-rose-400 via-pink-500 to-indigo-500 text-white py-20 px-4">
         <div className="max-w-7xl mx-auto flex flex-col items-center">
-          {/* Heading */}
           <h1 className="text-5xl font-bold text-center">
             Track Your Expenses Effortlessly
           </h1>
-
-          {/* Subheading */}
           <p className="mt-4 text-xl text-center">
             Manage your finances with a modern solution designed for you.
           </p>
-
-          {/* Feature Icons */}
           <div className="flex space-x-8 mt-10">
             <div className="flex flex-col items-center">
               <FaMoneyBillWave className="text-3xl" />
@@ -41,8 +37,6 @@ const HeroSection = () => {
               <p className="mt-2">Insightful Reports</p>
             </div>
           </div>
-
-          {/* Call to Action Button */}
           <Link to="/register">
             <button className="mt-8 px-6 py-3 bg-white text-fuchsia-500 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition duration-300">
               Get Started
@@ -50,13 +44,13 @@ const HeroSection = () => {
           </Link>
         </div>
       </div>
+
       {/* How it works */}
       <div className="py-20 px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800">
           How It Works
         </h2>
         <div className="mt-10 max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Step 1 */}
           <div className="flex flex-col items-center text-center">
             <div className="p-4 rounded-full bg-blue-500 text-white mb-4">
               <FaSignInAlt className="text-xl" />
@@ -64,7 +58,6 @@ const HeroSection = () => {
             <h3 className="mb-2 font-semibold">Sign Up</h3>
             <p>Register and start managing your expenses in a minute.</p>
           </div>
-          {/* Step 2 */}
           <div className="flex flex-col items-center text-center">
             <div className="p-4 rounded-full bg-green-500 text-white mb-4">
               <FaList className="text-xl" />
@@ -72,7 +65,6 @@ const HeroSection = () => {
             <h3 className="mb-2 font-semibold">Add Transactions</h3>
             <p>Quickly add income and expenses to your account.</p>
           </div>
-          {/* Step 3 */}
           <div className="flex flex-col items-center text-center">
             <div className="p-4 rounded-full bg-yellow-500 text-white mb-4">
               <FaChartPie className="text-xl" />
@@ -82,6 +74,7 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
       {/* Testimonials */}
       <div className="bg-gray-100 py-20 px-4">
         <h2 className="text-3xl font-bold text-center text-gray-800">
@@ -106,9 +99,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-      {/* CTA */}
-      <div className="bg-gradient-to-r from-rose-400 via-pink-500 to-indigo-500 text-white py-20 px-4
-">
+
+      {/* Final CTA */}
+      <div className="bg-gradient-to-r from-rose-400 via-pink-500 to-indigo-500 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold">
             Ready to Take Control of Your Finances?
@@ -123,6 +116,9 @@ const HeroSection = () => {
           </Link>
         </div>
       </div>
+
+      {/* Footer Section */}
+      <Footer /> {/* <-- Include Footer here */}
     </>
   );
 };
