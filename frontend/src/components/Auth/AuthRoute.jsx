@@ -3,7 +3,6 @@ import { Navigate } from "react-router-dom";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
 
 const AuthRoute = ({ children }) => {
-  //get the token
   const token = getUserFromStorage();
 
   if (token) {

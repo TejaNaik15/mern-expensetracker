@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
@@ -14,10 +15,37 @@ app.use(express.json()); //Pass incoming data
 app.use(cors());
 
 // User routes
+=======
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const userRouter = require("./routes/userRouter");
+const errorHandler = require("./middlewares/errorHandlerMiddleware");
+const categoryRouter = require("./routes/categoryRouter");
+const transactionRouter = require("./routes/transactionRouter");
+const app = express();
+
+mongoose
+  .connect("mongodb://localhost:27017/mern-expenses")
+  .then(() => console.log("DB Connected"))
+  .catch((e) => console.log(e));
+
+
+const corsOptions = {
+  origin: ["https://mern-expensetracker-frontend-51n5.onrender.com"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+app.use(express.json()); 
+
+>>>>>>> 1bad5074060df87a1b408861c32e16e0a51579b0
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/categories", categoryRouter);
 app.use("/api/v1/transactions", transactionRouter);
 
+<<<<<<< HEAD
 // Error handler middleware
 app.use(errorHandler);
 
@@ -35,3 +63,12 @@ const startServer = async () => {
 startServer();
 
 module.exports = app;
+=======
+app.use(errorHandler);
+
+
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () =>
+  console.log(`Server is running on this port... ${PORT} `)
+);
+>>>>>>> 1bad5074060df87a1b408861c32e16e0a51579b0

@@ -9,17 +9,13 @@ import {
 import AlertMessage from "../Alert/AlertMessage";
 
 const CategoriesList = () => {
-  //fetching
   const { data, isError, isLoading, isFetched, error, refetch } = useQuery({
     queryFn: listCategoriesAPI,
     queryKey: ["list-categories"],
   });
 
-  //Deleting
-  //Navigate
   const navigate = useNavigate();
 
-  // Mutation
   const {
     mutateAsync,
     isPending,
@@ -29,7 +25,6 @@ const CategoriesList = () => {
     mutationFn: deleteCategoryAPI,
     mutationKey: ["delete-category"],
   });
-  //Delete handler
   const handleDelete = (id) => {
     mutateAsync(id)
       .then((data) => {

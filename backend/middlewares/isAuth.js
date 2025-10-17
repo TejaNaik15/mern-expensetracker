@@ -11,7 +11,6 @@ const isAuthenticated = async (req, res, next) => {
     req.user = decoded.id;
     next();
   } catch (err) {
-    // Handles expired tokens, invalid signatures, etc.
     next(err);
   }
 };

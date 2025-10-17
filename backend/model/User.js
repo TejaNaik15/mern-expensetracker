@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: 'users' // Explicitly sets the collection name
   }
 );
 

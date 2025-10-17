@@ -1,21 +1,30 @@
-
-
 const express = require("express");
 const isAuthenticated = require("../middlewares/isAuth");
-const transactionCtrl = require("../controllers/transactionCtrl");
+const transactionController = require("../controllers/transactionCtrl");
 const transactionRouter = express.Router();
 
-//!add
-transactionRouter.post("/create", isAuthenticated, transactionCtrl.create);
-//! lists
-transactionRouter.get("/lists", isAuthenticated, transactionCtrl.lists);
-//! update
-transactionRouter.put("/update/:id", isAuthenticated, transactionCtrl.update);
-//! delete
+transactionRouter.post(
+  "/create",
+  isAuthenticated,
+  transactionController.create
+);
+
+transactionRouter.get(
+  "/lists",
+  isAuthenticated,
+  transactionController.getFilteredTransactions
+);
+
+transactionRouter.put(
+  "/update/:id",
+  isAuthenticated,
+  transactionController.update
+);
+
 transactionRouter.delete(
   "/delete/:id",
   isAuthenticated,
-  transactionCtrl.deleteTran
+  transactionController.delete
 );
 
 module.exports = transactionRouter;

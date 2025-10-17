@@ -23,13 +23,10 @@ const validationSchema = Yup.object({
 });
 
 const UpdateCategory = () => {
-  //Params
   const { id } = useParams();
   console.log(id);
-  //Navigate
   const navigate = useNavigate();
 
-  // Mutation
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: updateCategoryAPI,
     mutationKey: ["update-category"],
@@ -47,7 +44,6 @@ const UpdateCategory = () => {
       };
       mutateAsync(data)
         .then((data) => {
-          //redirect
           navigate("/categories");
         })
         .catch((e) => console.log(e));

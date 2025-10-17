@@ -9,12 +9,7 @@ import {
 } from "react-icons/fa";
 import { IoIosStats } from "react-icons/io";
 import { FaFilter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
-<<<<<<< HEAD
-import Footer from "./Footer"; // <-- Import Footer component
-=======
-import Footer from "./Footer"; 
->>>>>>> 1bad5074060df87a1b408861c32e16e0a51579b0
+import { Link } from "react-router-dom";import Footer from "./Footer"; // <-- Import Footer component
 
 const HeroSection = () => {
   return (
@@ -122,11 +117,7 @@ const HeroSection = () => {
       </div>
 
       {/* Footer Section */}
-<<<<<<< HEAD
-      <Footer /> {/* <-- Include Footer here */}
-=======
-      <Footer /> 
->>>>>>> 1bad5074060df87a1b408861c32e16e0a51579b0
+      <Footer />
     </>
   );
 };

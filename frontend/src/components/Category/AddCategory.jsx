@@ -21,10 +21,8 @@ const validationSchema = Yup.object({
 });
 
 const AddCategory = () => {
-  //Navigate
   const navigate = useNavigate();
 
-  // Mutation
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: addCategoryAPI,
     mutationKey: ["login"],
