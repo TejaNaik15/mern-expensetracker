@@ -2,9 +2,9 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-rose-400 via-pink-500 to-indigo-500 py-10 flex justify-center">
-      <div className="backdrop-blur-md bg-white/10 border border-white/20 px-8 py-3 rounded-xl shadow-lg flex items-center space-x-4 hover:shadow-xl transition duration-300 max-w-max">
-        <span className="text-white font-bold text-3xl">
+    <footer className="bg-transparent py-10 flex justify-center">
+      <div className="backdrop-blur-md bg-gray-800/50 border border-gray-700/20 px-8 py-3 rounded-xl shadow-lg flex items-center space-x-4 hover:shadow-xl transition duration-300 max-w-max">
+        <span className="text-gray-200 font-bold text-3xl">
           Developed by
         </span>
         <a

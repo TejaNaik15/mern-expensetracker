@@ -60,7 +60,7 @@ const LoginForm = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="max-w-md mx-auto my-10 bg-white p-6 rounded-xl shadow-lg space-y-6 border border-gray-200"
+      className="max-w-md mx-auto my-10 bg-gray-900/70 p-6 rounded-xl shadow-lg space-y-6 border border-gray-700"
     >
       <h2 className="text-3xl font-semibold text-center text-gray-800">
         Login
@@ -68,22 +68,26 @@ const LoginForm = () => {
       {/* Display messages */}
       {isPending && <AlertMessage type="loading" message="Login you in...." />}
       {isError && (
-        <AlertMessage type="error" message={error.response.data.message} />
+        <AlertMessage
+          type="error"
+          message={error?.response?.data?.message || "An unexpected error occurred"}
+        />
       )}
       {isSuccess && <AlertMessage type="success" message="Login success" />}
-      <p className="text-sm text-center text-gray-500">
+      <p className="text-sm text-center text-gray-400">
         Login to access your account
       </p>
 
       {/* Input Field - Email */}
       <div className="relative">
-        <FaEnvelope className="absolute top-3 left-3 text-gray-400" />
+        <FaEnvelope className="absolute top-3 left-3 text-gray-500" />
         <input
           id="email"
           type="email"
           {...formik.getFieldProps("email")}
           placeholder="Email"
-          className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          autocomplete="email"
+          className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.email && formik.errors.email && (
           <span className="text-xs text-red-500">{formik.errors.email}</span>
@@ -92,13 +96,14 @@ const LoginForm = () => {
 
       {/* Input Field - Password */}
       <div className="relative">
-        <FaLock className="absolute top-3 left-3 text-gray-400" />
+        <FaLock className="absolute top-3 left-3 text-gray-500" />
         <input
           id="password"
           type="password"
           {...formik.getFieldProps("password")}
           placeholder="Password"
-          className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          autocomplete="current-password"
+          className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.password && formik.errors.password && (
           <span className="text-xs text-red-500">{formik.errors.password}</span>

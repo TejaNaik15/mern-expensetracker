@@ -1,14 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  FaDollarSign,
-  FaCalendarAlt,
-  FaRegCommentDots,
-  FaWallet,
-} from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
 import { SiDatabricks } from "react-icons/si";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { addCategoryAPI } from "../../services/category/categoryService";
 import AlertMessage from "../Alert/AlertMessage";
@@ -25,7 +20,10 @@ const AddCategory = () => {
 
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: addCategoryAPI,
-    mutationKey: ["login"],
+    mutationKey: ["add-category"],
+    onSuccess: () => {
+      navigate("/categories");
+    },
   });
 
   const formik = useFormik({
@@ -35,11 +33,7 @@ const AddCategory = () => {
     },
     validationSchema,
     onSubmit: (values) => {
-      mutateAsync(values)
-        .then((data) => {
-          navigate("/categories");
-        })
-        .catch((e) => console.log(e));
+      mutateAsync(values).catch((e) => console.log(e));
     },
   });
 

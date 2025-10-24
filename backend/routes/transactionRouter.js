@@ -3,34 +3,13 @@ const isAuthenticated = require("../middlewares/isAuth");
 const transactionController = require("../controllers/transactionCtrl");
 const transactionRouter = express.Router();
 
-<<<<<<< Updated upstream
-transactionRouter.post(
-  "/create",
-  isAuthenticated,
-  transactionController.create
-);
-
-transactionRouter.get(
-  "/lists",
-  isAuthenticated,
-  transactionController.getFilteredTransactions
-);
-
-transactionRouter.put(
-  "/update/:id",
-  isAuthenticated,
-  transactionController.update
-);
-
-=======
 //!add
-transactionRouter.post("/create", isAuthenticated, transactionCtrl.create);
+transactionRouter.post("/create", isAuthenticated, transactionController.create);
 //! lists
-transactionRouter.get("/lists", isAuthenticated, transactionCtrl.getFilteredTransactions);
+transactionRouter.get("/lists", isAuthenticated, transactionController.getFilteredTransactions);
 //! update
-transactionRouter.put("/update/:id", isAuthenticated, transactionCtrl.update);
+transactionRouter.put("/update/:id", isAuthenticated, transactionController.update);
 //! delete
->>>>>>> Stashed changes
 transactionRouter.delete(
   "/delete/:id",
   isAuthenticated,

@@ -3,19 +3,12 @@ const Category = require("../model/Category");
 const Transaction = require("../model/Transaction");
 
 const categoryController = {
-<<<<<<< Updated upstream
-=======
   //--- Create ---
->>>>>>> Stashed changes
   create: asyncHandler(async (req, res) => {
     const { name, type } = req.body;
     if (!name || !type) {
       throw new Error("Name and type are required for creating a category");
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     const normalizedName = name.toLowerCase();
 
     const validTypes = ["income", "expense"];
@@ -40,19 +33,12 @@ const categoryController = {
     });
     res.status(201).json(category);
   }),
-<<<<<<< Updated upstream
-
-=======
   //--- Lists ---
->>>>>>> Stashed changes
   lists: asyncHandler(async (req, res) => {
     const categories = await Category.find({ user: req.user });
     res.status(200).json(categories);
   }),
-<<<<<<< Updated upstream
-=======
   //--- Update ---
->>>>>>> Stashed changes
   update: asyncHandler(async (req, res) => {
     const { categoryId } = req.params;
     const { type, name } = req.body;
@@ -78,13 +64,8 @@ const categoryController = {
     }
     res.json(updatedCategory);
   }),
-<<<<<<< Updated upstream
-
-  delete: asyncHandler(async (req, res) => {
-=======
   //--- Delete ---
-  deleteCat: asyncHandler(async (req, res) => {
->>>>>>> Stashed changes
+  delete: asyncHandler(async (req, res) => {
     const category = await Category.findById(req.params.id);
     if (category && category.user.toString() === req.user.toString()) {
       const defaultCategory = "Uncategorized";

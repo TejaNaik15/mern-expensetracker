@@ -23,7 +23,7 @@ categoryRouter.put(
 );
 
 categoryRouter.delete(
-  "/api/v1/categories/delete/:id",
+  "/delete/:id",
   isAuthenticated,
   categoryController.delete
 );

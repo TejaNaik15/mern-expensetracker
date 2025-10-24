@@ -1,22 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  FaDollarSign,
-  FaCalendarAlt,
-  FaRegCommentDots,
-  FaWallet,
-} from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
 import { SiDatabricks } from "react-icons/si";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCategoryAPI } from "../../services/category/categoryService";
 import AlertMessage from "../Alert/AlertMessage";
 
 const validationSchema = Yup.object({
-  name: Yup.string()
-    .required("Category name is required")
-    .oneOf(["income", "expense"]),
+  name: Yup.string().required("Category name is required"),
   type: Yup.string()
     .required("Category type is required")
     .oneOf(["income", "expense"]),
@@ -24,12 +17,14 @@ const validationSchema = Yup.object({
 
 const UpdateCategory = () => {
   const { id } = useParams();
-  console.log(id);
   const navigate = useNavigate();
 
   const { mutateAsync, isPending, isError, error, isSuccess } = useMutation({
     mutationFn: updateCategoryAPI,
     mutationKey: ["update-category"],
+    onSuccess: () => {
+      navigate("/categories");
+    },
   });
 
   const formik = useFormik({
@@ -42,11 +37,7 @@ const UpdateCategory = () => {
         ...values,
         id,
       };
-      mutateAsync(data)
-        .then((data) => {
-          navigate("/categories");
-        })
-        .catch((e) => console.log(e));
+      mutateAsync(data).catch((e) => console.log(e));
     },
   });
 
