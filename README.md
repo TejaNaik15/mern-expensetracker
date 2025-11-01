@@ -3,11 +3,7 @@
   <p>
     A full-stack personal expense tracking application built with the MERN stack (MongoDB, Express, React, Node.js).
   </p>
-  <p>
-    <a href="https://github.com/TejaNaik15/mern-expensetracker/stargazers"><img src="https://img.shields.io/github/stars/TejaNaik15/mern-expensetracker?style=for-the-badge&logo=github&color=gold" alt="Stars"></a>
-    <a href="https://github.com/TejaNaik15/mern-expensetracker/network/members"><img src="https://img.shields.io/github/forks/TejaNaik15/mern-expensetracker?style=for-the-badge&logo=github&color=blue" alt="Forks"></a>
-    <a href="https://github.com/TejaNaik15/mern-expensetracker/issues"><img src="https://img.shields.io/github/issues/TejaNaik15/mern-expensetracker?style=for-the-badge&logo=github" alt="Issues"></a>
-  </p>
+ 
 </div>
 
 This project is a complete expense tracking application that allows users to register, log in, and manage their financial transactions. It features a React-based frontend and a robust Node.js/Express backend API that communicates with a MongoDB database.
