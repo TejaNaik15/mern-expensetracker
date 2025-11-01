@@ -11,10 +11,10 @@ import { loginAction } from "../../redux/slice/authSlice";
 
 //! Validations
 const validationSchema = Yup.object({
-  email: Yup.string().email("Invalid").required("Email is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()
     .min(5, "Password must be at least 5 characters long")
-    .required("Email is required"),
+    .required("Password is required"),
 });
 
 const LoginForm = () => {
@@ -62,7 +62,7 @@ const LoginForm = () => {
       onSubmit={formik.handleSubmit}
       className="max-w-md mx-auto my-10 bg-gray-900/70 p-6 rounded-xl shadow-lg space-y-6 border border-gray-700"
     >
-      <h2 className="text-3xl font-semibold text-center text-gray-800">
+      <h2 className="text-3xl font-semibold text-center text-white">
         Login
       </h2>
       {/* Display messages */}

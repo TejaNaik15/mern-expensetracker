@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-const { db } = require("./db/db");
+const connectDB = require("./db");
+const userRouter = require("./routes/userRouter");
+const categoryRouter = require("./routes/categoryRouter");
+const transactionRouter = require("./routes/transactionRouter");
+const errorHandler = require("./middlewares/errorHandlerMiddleware");
 
 const app = express();
 
@@ -10,31 +14,18 @@ const PORT = process.env.PORT || 8000;
 
 // Middlewares
 app.use(express.json());
+app.use(cors());
 
-// CORS Configuration
-const corsOptions = {
-  origin: (origin, callback) => {
-    // Regex to allow all localhost ports during development
-    const isDevelopment = /localhost:\d+$/.test(origin);
-    // TODO: Add your deployed frontend URL to this check
-    const isAllowed = isDevelopment || origin === "http://localhost:5173";
+// Routes
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/categories", categoryRouter);
+app.use("/api/v1/transactions", transactionRouter);
 
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    if (!isAllowed) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-};
-
-app.use(cors(corsOptions));
-
-// TODO: Add your API routes here
+// Error handler middleware
+app.use(errorHandler);
 
 const server = () => {
-  db();
+  connectDB();
   app.listen(PORT, () => {
     console.log("listening to port:", PORT);
   });

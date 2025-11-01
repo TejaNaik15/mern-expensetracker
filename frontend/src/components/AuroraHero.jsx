@@ -32,14 +32,14 @@ export const AuroraHero = ({ children }) => {
       style={{
         backgroundImage,
       }}
-      className="relative w-full overflow-hidden bg-gray-950 px-4 text-gray-200"
+      className="relative min-h-screen w-full overflow-hidden bg-gray-950 px-4 text-gray-200"
     >
       <div className="absolute inset-0 z-0">
         <Canvas>
           <Stars radius={50} count={2500} factor={4} fade speed={2} />
         </Canvas>
       </div>
-      <div className="relative z-10 flex flex-col items-center pt-24">
+      <div className="relative z-10 min-h-screen">
         {children}
       </div>
     </motion.section>

@@ -44,13 +44,13 @@ const UpdateCategory = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="max-w-lg mx-auto my-10 bg-white p-6 rounded-lg shadow-lg space-y-6"
+      className="max-w-lg mx-auto my-10 bg-gray-900/70 p-6 rounded-xl shadow-lg space-y-6 border border-gray-700"
     >
       <div className="text-center">
-        <h2 className="text-2xl font-semibold text-gray-800">
+        <h2 className="text-2xl font-semibold text-white">
           Update Category
         </h2>
-        <p className="text-gray-600">Fill in the details below.</p>
+        <p className="text-gray-300">Fill in the details below.</p>
       </div>
       {/* Display alert message */}
       {isError && (
@@ -72,7 +72,7 @@ const UpdateCategory = () => {
       <div className="space-y-2">
         <label
           htmlFor="type"
-          className="flex gap-2 items-center text-gray-700 font-medium"
+          className="flex gap-2 items-center text-gray-300 font-medium"
         >
           <FaWallet className="text-blue-500" />
           <span>Type</span>
@@ -80,7 +80,7 @@ const UpdateCategory = () => {
         <select
           {...formik.getFieldProps("type")}
           id="type"
-          className="w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+          className="w-full p-2 mt-1 border border-gray-700 bg-gray-900 text-gray-200 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
         >
           <option value="">Select transaction type</option>
           <option value="income">Income</option>
@@ -93,7 +93,7 @@ const UpdateCategory = () => {
 
       {/* Category Name */}
       <div className="flex flex-col">
-        <label htmlFor="name" className="text-gray-700 font-medium">
+        <label htmlFor="name" className="text-gray-300 font-medium">
           <SiDatabricks className="inline mr-2 text-blue-500" />
           Name
         </label>
@@ -102,7 +102,7 @@ const UpdateCategory = () => {
           {...formik.getFieldProps("name")}
           placeholder="Name"
           id="name"
-          className="w-full mt-1 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 px-3"
+          className="w-full mt-1 border border-gray-700 bg-gray-900 text-gray-200 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 py-2 px-3"
         />
         {formik.touched.name && formik.errors.name && (
           <p className="text-red-500 text-xs italic">{formik.errors.name}</p>
