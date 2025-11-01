@@ -9,44 +9,55 @@ const usersController = {
     const { username, email, password } = req.body;
     
     if (!username || !email || !password) {
-      throw new Error("Please all fields are required");
+      return res.status(400).json({ message: "All fields are required" });
     }
     
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      throw new Error("User already exists");
+    try {
+      const userExists = await User.findOne({ email }).maxTimeMS(10000);
+      if (userExists) {
+        return res.status(400).json({ message: "User already exists" });
+      }
+      
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      
+      const userCreated = await User.create({
+        email,
+        username,
+        password: hashedPassword,
+      });
+      
+      res.status(201).json({
+        message: "User registered successfully",
+        username: userCreated.username,
+        email: userCreated.email,
+        id: userCreated._id,
+      });
+    } catch (error) {
+      console.error('Registration error:', error);
+      if (error.name === 'MongooseError' || error.message.includes('buffering')) {
+        return res.status(503).json({ message: "Database connection issue. Please try again later." });
+      }
+      return res.status(500).json({ message: "Server error. Please try again later." });
     }
-    
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-    //! Create the user and save into db
-    const userCreated = await User.create({
-      email,
-      username,
-      password: hashedPassword,
-    });
-    
-
-    res.json({
-      username: userCreated.username,
-      email: userCreated.email,
-      id: userCreated._id,
-    });
   }),
   
   login: asyncHandler(async (req, res) => {
-    
     const { email, password } = req.body;
     
+    if (!email || !password) {
+      return res.status(400).json({ message: "Email and password are required" });
+    }
+    
     try {
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).maxTimeMS(10000);
       if (!user) {
-        throw new Error("Invalid login credentials");
+        return res.status(401).json({ message: "Invalid login credentials" });
       }
       
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        throw new Error("Invalid login credentials");
+        return res.status(401).json({ message: "Invalid login credentials" });
       }
       
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
@@ -60,11 +71,12 @@ const usersController = {
         email: user.email,
         username: user.username,
       });
-    } catch (dbError) {
-      if (dbError.message.includes('buffering timed out')) {
-        throw new Error("Database connection issue. Please try again later.");
+    } catch (error) {
+      console.error('Login error:', error);
+      if (error.name === 'MongooseError' || error.message.includes('buffering')) {
+        return res.status(503).json({ message: "Database connection issue. Please try again later." });
       }
-      throw dbError;
+      return res.status(500).json({ message: "Server error. Please try again later." });
     }
   }),
 
