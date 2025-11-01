@@ -4,21 +4,33 @@ const mongoose = require("mongoose");
 mongoose.set('bufferCommands', false);
 
 const connectDB = async () => {
+  // Try local MongoDB first
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 30000,
-      connectTimeoutMS: 30000,
-      maxPoolSize: 10,
-      minPoolSize: 1,
-      maxIdleTimeMS: 30000,
-      waitQueueTimeoutMS: 30000,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 5000,
+      connectTimeoutMS: 5000,
     });
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(`MongoDB Connected (Local): ${conn.connection.host}`);
     return conn;
-  } catch (error) {
-    console.error(`Error connecting to MongoDB: ${error.message}`);
-    throw error;
+  } catch (localError) {
+    console.log('Local MongoDB not available, trying Atlas...');
+    
+    // Fallback to Atlas if local fails
+    try {
+      const conn = await mongoose.connect(process.env.MONGO_URI_ATLAS, {
+        serverSelectionTimeoutMS: 10000,
+        socketTimeoutMS: 10000,
+        connectTimeoutMS: 10000,
+      });
+      console.log(`MongoDB Connected (Atlas): ${conn.connection.host}`);
+      return conn;
+    } catch (atlasError) {
+      console.error(`Failed to connect to both local and Atlas MongoDB`);
+      console.error(`Local error: ${localError.message}`);
+      console.error(`Atlas error: ${atlasError.message}`);
+      throw new Error('No database connection available');
+    }
   }
 };
 

@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+const mockDB = require("../mockDB");
 
 const usersController = {
   
@@ -13,7 +14,15 @@ const usersController = {
     }
     
     try {
-      const userExists = await User.findOne({ email }).maxTimeMS(10000);
+      const dbConnected = req.app.get('dbConnected');
+      let userExists, userCreated;
+      
+      if (dbConnected) {
+        userExists = await User.findOne({ email }).maxTimeMS(10000);
+      } else {
+        userExists = await mockDB.users.findOne({ email });
+      }
+      
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -21,11 +30,19 @@ const usersController = {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       
-      const userCreated = await User.create({
-        email,
-        username,
-        password: hashedPassword,
-      });
+      if (dbConnected) {
+        userCreated = await User.create({
+          email,
+          username,
+          password: hashedPassword,
+        });
+      } else {
+        userCreated = await mockDB.users.create({
+          email,
+          username,
+          password: hashedPassword,
+        });
+      }
       
       res.status(201).json({
         message: "User registered successfully",
@@ -50,7 +67,15 @@ const usersController = {
     }
     
     try {
-      const user = await User.findOne({ email }).maxTimeMS(10000);
+      const dbConnected = req.app.get('dbConnected');
+      let user;
+      
+      if (dbConnected) {
+        user = await User.findOne({ email }).maxTimeMS(10000);
+      } else {
+        user = await mockDB.users.findOne({ email });
+      }
+      
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }

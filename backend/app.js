@@ -30,19 +30,21 @@ app.use("/api/v1/transactions", transactionRouter);
 app.use(errorHandler);
 
 const server = async () => {
-  // Start server first
-  app.listen(PORT, () => {
-    console.log("Server listening on port:", PORT);
-  });
-  
-  // Try to connect to database
+  // Try to connect to database first
   try {
     await connectDB();
-    console.log("Database connected successfully");
+    app.set('dbConnected', true);
   } catch (error) {
     console.log("Database connection failed:", error.message);
-    console.log("Server running without database connection");
+    console.log("Server will use mock database for development");
+    app.set('dbConnected', false);
   }
+  
+  // Start server
+  app.listen(PORT, () => {
+    console.log("Server listening on port:", PORT);
+    console.log("Visit http://localhost:8000/api/v1/test to verify server is running");
+  });
 };
 
 server();
