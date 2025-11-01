@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 // Disable buffering
 mongoose.set('bufferCommands', false);
-mongoose.set('bufferMaxEntries', 0);
 
 const connectDB = async () => {
   try {
@@ -10,7 +9,6 @@ const connectDB = async () => {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 30000,
       connectTimeoutMS: 30000,
-      bufferMaxEntries: 0,
       maxPoolSize: 10,
       minPoolSize: 1,
       maxIdleTimeMS: 30000,
