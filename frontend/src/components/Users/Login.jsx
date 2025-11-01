@@ -86,7 +86,7 @@ const LoginForm = () => {
           type="email"
           {...formik.getFieldProps("email")}
           placeholder="Email"
-          autocomplete="email"
+          autoComplete="email"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.email && formik.errors.email && (
@@ -102,7 +102,7 @@ const LoginForm = () => {
           type="password"
           {...formik.getFieldProps("password")}
           placeholder="Password"
-          autocomplete="current-password"
+          autoComplete="current-password"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.password && formik.errors.password && (

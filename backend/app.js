@@ -24,10 +24,16 @@ app.use("/api/v1/transactions", transactionRouter);
 // Error handler middleware
 app.use(errorHandler);
 
-const server = () => {
-  connectDB();
+const server = async () => {
+  try {
+    await connectDB();
+    console.log("Database connected successfully");
+  } catch (error) {
+    console.log("Database connection failed, but server will still start:", error.message);
+  }
+  
   app.listen(PORT, () => {
-    console.log("listening to port:", PORT);
+    console.log("Server listening on port:", PORT);
   });
 };
 
