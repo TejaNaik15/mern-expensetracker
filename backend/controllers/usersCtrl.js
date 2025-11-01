@@ -38,26 +38,34 @@ const usersController = {
     
     const { email, password } = req.body;
     
-    const user = await User.findOne({ email });
-    if (!user) {
-      throw new Error("Invalid login credentials");
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        throw new Error("Invalid login credentials");
+      }
+      
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        throw new Error("Invalid login credentials");
+      }
+      
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+        expiresIn: "30d",
+      });
+      
+      res.json({
+        message: "Login Success",
+        token,
+        id: user._id,
+        email: user.email,
+        username: user.username,
+      });
+    } catch (dbError) {
+      if (dbError.message.includes('buffering timed out')) {
+        throw new Error("Database connection issue. Please try again later.");
+      }
+      throw dbError;
     }
-    
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      throw new Error("Invalid login credentials");
-    }
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "30d",
-    });
-    
-    res.json({
-      message: "Login Success",
-      token,
-      id: user._id,
-      email: user.email,
-      username: user.username,
-    });
   }),
 
   profile: asyncHandler(async (req, res) => {
