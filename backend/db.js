@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 // Disable buffering to prevent timeout issues
 mongoose.set('bufferCommands', false);
-mongoose.set('bufferMaxEntries', 0);
 
 const connectDB = async () => {
   try {
