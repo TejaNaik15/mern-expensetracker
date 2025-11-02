@@ -11,11 +11,15 @@ export default defineConfig({
     },
   },
   build: {
+    target: 'esnext',
+    minify: 'esbuild',
     rollupOptions: {
-      external: [],
+      output: {
+        manualChunks: undefined,
+      },
     },
-    commonjsOptions: {
-      transformMixedEsModules: true,
-    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 })

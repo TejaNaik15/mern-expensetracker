@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "start": "vite",
-    "build": "npm install && vite build",
+    "build": "rm -rf node_modules package-lock.json && npm install && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -46,6 +46,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.2.0",
-    "vite": "^5.4.10"
+    "vite": "^4.5.3",
+    "@rollup/rollup-linux-x64-gnu": "^4.21.3"
   }
 }
