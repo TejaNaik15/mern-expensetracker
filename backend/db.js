@@ -1,33 +1,33 @@
 const mongoose = require("mongoose");
 
-// Completely disable buffering
+// NUCLEAR OPTION: Disable ALL buffering
 mongoose.set('bufferCommands', false);
+mongoose.set('bufferMaxEntries', 0);
+
+// Override mongoose query to prevent buffering
+const originalExec = mongoose.Query.prototype.exec;
+mongoose.Query.prototype.exec = function() {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error('Database not connected');
+  }
+  return originalExec.call(this);
+};
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 30000,
-      socketTimeoutMS: 0,
-      maxPoolSize: 10,
-      minPoolSize: 5,
-    });
+    // Force immediate connection
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     
-    // Wait for connection to be ready
-    await new Promise((resolve) => {
-      if (mongoose.connection.readyState === 1) {
-        resolve();
-      } else {
-        mongoose.connection.once('connected', resolve);
-      }
-    });
+    // Ensure connection is ready
+    if (mongoose.connection.readyState !== 1) {
+      throw new Error('Connection not ready');
+    }
     
-    console.log(`✅ MongoDB Atlas Connected: ${mongoose.connection.host}`);
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`❌ MongoDB Atlas connection failed: ${error.message}`);
+    console.error(`❌ MongoDB connection failed: ${error.message}`);
     throw error;
   }
 };
-
-module.exports = connectDB;
 
 module.exports = connectDB;

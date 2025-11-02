@@ -13,7 +13,8 @@ const usersController = {
     }
     
     try {
-      const userExists = await User.findOne({ email }).lean().exec();
+      // Force immediate execution without buffering
+      const userExists = await User.findOne({ email }).setOptions({ bufferCommands: false }).exec();
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -50,7 +51,8 @@ const usersController = {
     }
     
     try {
-      const user = await User.findOne({ email }).lean().exec();
+      // Force immediate execution without buffering
+      const user = await User.findOne({ email }).setOptions({ bufferCommands: false }).exec();
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }

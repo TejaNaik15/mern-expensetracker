@@ -35,12 +35,13 @@ const server = async () => {
     console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
   });
   
-  // Connect to database and wait
+  // MUST connect to database before starting server
   try {
     await connectDB();
-    console.log("✅ Database ready for operations");
+    console.log("✅ Database ready - Server can now handle requests");
   } catch (error) {
     console.log("❌ Database connection failed:", error.message);
+    console.log("⚠️  Exiting - Cannot run without database");
     process.exit(1);
   }
 };
