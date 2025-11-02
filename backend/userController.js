@@ -4,28 +4,26 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const httpError = require("http-errors");
 
-//@desc   Register user
-//@route  POST /api/v1/users/register
-//@access Public
+
 const register = asyncHandler(async (req, res) => {
   const { fullname, email, password } = req.body;
 
-  // Check if all fields are present
+  
   if (!fullname || !email || !password) {
     throw httpError(400, "Please provide all required fields");
   }
 
-  // Check if user already exists
+  
   const userExists = await User.findOne({ email });
   if (userExists) {
     throw httpError(409, "User with that email already exists");
   }
 
-  // Hash the password
+  
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  // Create the user
+  
   const user = await User.create({
     fullname,
     email,
@@ -43,9 +41,7 @@ const register = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc   Login user
-//@route  POST /api/v1/users/login
-//@access Public
+
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
