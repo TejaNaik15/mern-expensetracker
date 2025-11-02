@@ -13,7 +13,7 @@ const usersController = {
     }
     
     try {
-      const userExists = await User.findOne({ email }).maxTimeMS(5000);
+      const userExists = await User.findOne({ email }).exec();
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -50,7 +50,7 @@ const usersController = {
     }
     
     try {
-      const user = await User.findOne({ email }).maxTimeMS(5000);
+      const user = await User.findOne({ email }).exec();
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }
