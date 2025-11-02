@@ -13,8 +13,13 @@ const usersController = {
     }
     
     try {
-      // Force immediate execution without buffering
-      const userExists = await User.findOne({ email }).setOptions({ bufferCommands: false }).exec();
+      // Execute query with timeout protection
+      const userExists = await Promise.race([
+        User.findOne({ email }).exec(),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Query timeout')), 5000)
+        )
+      ]);
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -51,8 +56,13 @@ const usersController = {
     }
     
     try {
-      // Force immediate execution without buffering
-      const user = await User.findOne({ email }).setOptions({ bufferCommands: false }).exec();
+      // Execute query with timeout protection
+      const user = await Promise.race([
+        User.findOne({ email }).exec(),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Query timeout')), 5000)
+        )
+      ]);
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }
