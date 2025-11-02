@@ -30,17 +30,17 @@ app.use("/api/v1/transactions", transactionRouter);
 app.use(errorHandler);
 
 const server = async () => {
-  try {
-    await connectDB();
-  } catch (error) {
-    console.log("❌ Database connection failed:", error.message);
-    process.exit(1);
-  }
-  
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
   });
+  
+  try {
+    await connectDB();
+  } catch (error) {
+    console.log("❌ Database connection failed:", error.message);
+    console.log("⚠️  Server running without database connection");
+  }
 };
 
 server();
