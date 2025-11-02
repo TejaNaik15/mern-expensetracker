@@ -1,25 +1,33 @@
 const mongoose = require("mongoose");
 
-// Disable buffering only with valid option
+// Completely disable buffering
 mongoose.set('bufferCommands', false);
 
-let isConnected = false;
-
 const connectDB = async () => {
-  if (isConnected) return;
-  
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
-    isConnected = true;
-    console.log(`✅ MongoDB Atlas Connected: ${conn.connection.host}`);
-    return conn;
+    await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 30000,
+      socketTimeoutMS: 0,
+      maxPoolSize: 10,
+      minPoolSize: 5,
+    });
+    
+    // Wait for connection to be ready
+    await new Promise((resolve) => {
+      if (mongoose.connection.readyState === 1) {
+        resolve();
+      } else {
+        mongoose.connection.once('connected', resolve);
+      }
+    });
+    
+    console.log(`✅ MongoDB Atlas Connected: ${mongoose.connection.host}`);
   } catch (error) {
     console.error(`❌ MongoDB Atlas connection failed: ${error.message}`);
-    isConnected = false;
     throw error;
   }
 };
 
-module.exports = { connectDB, isConnected: () => isConnected };
+module.exports = connectDB;
 
 module.exports = connectDB;
