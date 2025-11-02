@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+const { isConnected } = require("../db");
 
 const usersController = {
   
@@ -13,7 +14,11 @@ const usersController = {
     }
     
     try {
-      const userExists = await User.findOne({ email });
+      if (!isConnected()) {
+        return res.status(503).json({ message: "Database not connected. Please try again later." });
+      }
+      
+      const userExists = await User.findOne({ email }).maxTimeMS(5000);
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -50,7 +55,11 @@ const usersController = {
     }
     
     try {
-      const user = await User.findOne({ email });
+      if (!isConnected()) {
+        return res.status(503).json({ message: "Database not connected. Please try again later." });
+      }
+      
+      const user = await User.findOne({ email }).maxTimeMS(5000);
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }

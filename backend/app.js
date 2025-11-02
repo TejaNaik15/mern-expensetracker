@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const connectDB = require("./db");
+const { connectDB, isConnected } = require("./db");
 const userRouter = require("./routes/userRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const transactionRouter = require("./routes/transactionRouter");
@@ -35,12 +35,11 @@ const server = async () => {
     console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
   });
   
-  try {
-    await connectDB();
-  } catch (error) {
+  // Connect to database
+  connectDB().catch(error => {
     console.log("❌ Database connection failed:", error.message);
     console.log("⚠️  Server running without database connection");
-  }
+  });
 };
 
 server();
