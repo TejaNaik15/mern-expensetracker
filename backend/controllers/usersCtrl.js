@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+const { isConnected } = require("../db");
 
 const usersController = {
   
@@ -13,13 +14,13 @@ const usersController = {
     }
     
     try {
-      // Execute query with timeout protection
-      const userExists = await Promise.race([
-        User.findOne({ email }).exec(),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Query timeout')), 5000)
-        )
-      ]);
+      // Check connection before query
+      if (!isConnected()) {
+        return res.status(503).json({ message: "Database not available. Please try again." });
+      }
+      
+      // Direct query with immediate timeout
+      const userExists = await User.findOne({ email }).maxTimeMS(3000);
       if (userExists) {
         return res.status(400).json({ message: "User already exists" });
       }
@@ -56,13 +57,13 @@ const usersController = {
     }
     
     try {
-      // Execute query with timeout protection
-      const user = await Promise.race([
-        User.findOne({ email }).exec(),
-        new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Query timeout')), 5000)
-        )
-      ]);
+      // Check connection before query
+      if (!isConnected()) {
+        return res.status(503).json({ message: "Database not available. Please try again." });
+      }
+      
+      // Direct query with immediate timeout
+      const user = await User.findOne({ email }).maxTimeMS(3000);
       if (!user) {
         return res.status(401).json({ message: "Invalid login credentials" });
       }

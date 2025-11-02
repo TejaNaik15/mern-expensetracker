@@ -1,46 +1,32 @@
 const mongoose = require("mongoose");
 
-// Only use VALID mongoose options
+// ABSOLUTE FINAL SOLUTION - Disable ALL buffering mechanisms
 mongoose.set('bufferCommands', false);
 
-// Override mongoose to prevent buffering timeout
-const originalExec = mongoose.Query.prototype.exec;
-mongoose.Query.prototype.exec = function() {
-  // Force immediate execution - no buffering allowed
-  if (mongoose.connection.readyState !== 1) {
-    return Promise.reject(new Error('Database not connected - please try again'));
-  }
-  return originalExec.call(this);
-};
+// Global connection state
+let isDBConnected = false;
 
 const connectDB = async () => {
+  if (isDBConnected) return;
+  
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    });
+    // Simple, direct connection
+    await mongoose.connect(process.env.MONGO_URI);
     
-    // Wait for connection to be fully ready
-    await new Promise((resolve, reject) => {
-      if (mongoose.connection.readyState === 1) {
-        resolve();
-      } else {
-        const timeout = setTimeout(() => {
-          reject(new Error('Connection timeout'));
-        }, 10000);
-        
-        mongoose.connection.once('connected', () => {
-          clearTimeout(timeout);
-          resolve();
-        });
-      }
-    });
+    // Mark as connected only when truly ready
+    isDBConnected = mongoose.connection.readyState === 1;
     
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    if (!isDBConnected) {
+      throw new Error('Connection not established');
+    }
+    
+    console.log(`✅ MongoDB Connected: ${mongoose.connection.host}`);
   } catch (error) {
+    isDBConnected = false;
     console.error(`❌ MongoDB connection failed: ${error.message}`);
     throw error;
   }
 };
 
-module.exports = connectDB;
+// Export both connection function and status checker
+module.exports = { connectDB, isConnected: () => isDBConnected };
