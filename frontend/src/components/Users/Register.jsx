@@ -55,7 +55,7 @@ const RegistrationForm = () => {
       onSubmit={formik.handleSubmit}
       className="max-w-md mx-auto my-10 bg-gray-900/70 p-6 rounded-xl shadow-lg space-y-6 border border-gray-700"
     >
-      <h2 className="text-3xl font-semibold text-center text-gray-800">
+      <h2 className="text-3xl font-semibold text-center text-white">
         Sign Up
       </h2>
       {/* Display messages */}
@@ -81,7 +81,7 @@ const RegistrationForm = () => {
           type="text"
           {...formik.getFieldProps("username")}
           placeholder="Username"
-          autocomplete="username"
+          autoComplete="username"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.username && formik.errors.username && (
@@ -97,7 +97,7 @@ const RegistrationForm = () => {
           type="email"
           {...formik.getFieldProps("email")}
           placeholder="Email"
-          autocomplete="email"
+          autoComplete="email"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.email && formik.errors.email && (
@@ -113,7 +113,7 @@ const RegistrationForm = () => {
           type="password"
           {...formik.getFieldProps("password")}
           placeholder="Password"
-          autocomplete="new-password"
+          autoComplete="new-password"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.password && formik.errors.password && (
@@ -129,7 +129,7 @@ const RegistrationForm = () => {
           type="password"
           {...formik.getFieldProps("confirmPassword")}
           placeholder="Confirm Password"
-          autocomplete="new-password"
+          autoComplete="new-password"
           className="pl-10 pr-4 py-2 w-full rounded-md border border-gray-700 bg-gray-900 text-gray-200 focus:border-blue-500 focus:ring-blue-500"
         />
         {formik.touched.confirmPassword && formik.errors.confirmPassword && (

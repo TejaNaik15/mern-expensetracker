@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
 
+mongoose.set('bufferCommands', false);
+mongoose.set('bufferMaxEntries', 0);
+
 const connectDB = async () => {
   try {
-    mongoose.set('strictQuery', false);
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`✅ MongoDB Atlas Connected: ${conn.connection.host}`);
     return conn;
   } catch (error) {
