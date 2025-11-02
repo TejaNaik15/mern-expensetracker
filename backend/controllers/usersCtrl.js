@@ -35,10 +35,10 @@ const usersController = {
       });
     } catch (error) {
       console.error('Registration error:', error);
-      if (error.name === 'MongooseError' || error.message.includes('buffering')) {
-        return res.status(503).json({ message: "Database connection issue. Please try again later." });
+      if (error.name === 'MongooseError' || error.message.includes('buffering') || error.message.includes('timeout')) {
+        return res.status(503).json({ message: "Database timeout. Please try again." });
       }
-      return res.status(500).json({ message: "Server error. Please try again later." });
+      return res.status(500).json({ message: error.message || "Server error. Please try again later." });
     }
   }),
   
@@ -73,10 +73,10 @@ const usersController = {
       });
     } catch (error) {
       console.error('Login error:', error);
-      if (error.name === 'MongooseError' || error.message.includes('buffering')) {
-        return res.status(503).json({ message: "Database connection issue. Please try again later." });
+      if (error.name === 'MongooseError' || error.message.includes('buffering') || error.message.includes('timeout')) {
+        return res.status(503).json({ message: "Database timeout. Please try again." });
       }
-      return res.status(500).json({ message: "Server error. Please try again later." });
+      return res.status(500).json({ message: error.message || "Server error. Please try again later." });
     }
   }),
 
