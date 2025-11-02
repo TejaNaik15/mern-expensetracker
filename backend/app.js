@@ -30,21 +30,21 @@ app.use("/api/v1/transactions", transactionRouter);
 app.use(errorHandler);
 
 const server = async () => {
-  // Try to connect to database first
+  // Start server first
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
+  });
+  
+  // Try to connect to database
   try {
     await connectDB();
-    app.set('dbConnected', true);
+    console.log("✅ Database connection successful");
   } catch (error) {
-    console.log("Database connection failed:", error.message);
-    console.log("Server will use mock database for development");
-    app.set('dbConnected', false);
+    console.log("❌ Database connection failed:", error.message);
+    console.log("⚠️  Server running without database - some features may not work");
+    console.log("📝 To fix: Add your IP to MongoDB Atlas whitelist or use 0.0.0.0/0");
   }
-  
-  // Start server
-  app.listen(PORT, () => {
-    console.log("Server listening on port:", PORT);
-    console.log("Visit http://localhost:8000/api/v1/test to verify server is running");
-  });
 };
 
 server();
