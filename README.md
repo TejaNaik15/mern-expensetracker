@@ -1,4 +1,4 @@
-# 💰 MERN Expense Tracker
+# 💰 MERN Expense Tracker (EXPENSE MATE)
 
 <div align="center">
   <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React">
@@ -251,7 +251,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Teja Naik**
 - GitHub: [@TejaNaik15](https://github.com/TejaNaik15)
-- LinkedIn: [Teja Naik](https://linkedin.com/in/teja-naik)
+- LinkedIn: [Teja Naik](https://www.linkedin.com/in/teja-naik-0b3021282/)
 
 ## 🙏 Acknowledgments
 
