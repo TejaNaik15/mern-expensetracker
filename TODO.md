@@ -1,2 +1,0 @@
-- [x] Fix React warning in Register.jsx by adding confirmPassword to initialValues
-- [x] Start the backend server to resolve 404 error
