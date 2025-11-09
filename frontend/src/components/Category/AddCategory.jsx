@@ -48,7 +48,7 @@ const AddCategory = () => {
         </h2>
         <p className="text-gray-600">Fill in the details below.</p>
       </div>
-      {/* Display alert message */}
+      
       {isError && (
         <AlertMessage
           type="error"
@@ -64,7 +64,7 @@ const AddCategory = () => {
           message="Category added successfully, redirecting..."
         />
       )}
-      {/* Category Type */}
+      
       <div className="space-y-2">
         <label
           htmlFor="type"
@@ -87,7 +87,7 @@ const AddCategory = () => {
         )}
       </div>
 
-      {/* Category Name */}
+      
       <div className="flex flex-col">
         <label htmlFor="name" className="text-gray-700 font-medium">
           <SiDatabricks className="inline mr-2 text-blue-500" />
@@ -105,7 +105,7 @@ const AddCategory = () => {
         )}
       </div>
 
-      {/* Submit Button */}
+
       <button
         type="submit"
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200 transform"
