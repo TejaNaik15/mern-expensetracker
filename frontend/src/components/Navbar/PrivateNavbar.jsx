@@ -12,12 +12,12 @@ function classNames(...classes) {
 }
 
 export default function PrivateNavbar() {
-  //Dispatch
+
   const dispatch = useDispatch();
-  //Logout handler
+  
   const logoutHandler = () => {
     dispatch(logoutAction());
-    //remove the user from storage
+
     localStorage.removeItem("userInfo");
   };
 
@@ -29,7 +29,7 @@ export default function PrivateNavbar() {
             <div className="flex h-16 justify-start items-center">
               <div className="flex justify-center flex-row w-full">
                 <div className="-ml-2 mr-2 flex items-left md:hidden">
-                  {/* Mobile menu button */}
+                
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -41,7 +41,7 @@ export default function PrivateNavbar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-shrink-0 items-center">
-                  {/* Logo */}
+            
                   <SiAuthy className="h-8 w-auto text-pink-500" />
                 </div>
                 <div className="hidden md:ml-6 md:flex md:space-x-8">
@@ -97,7 +97,7 @@ export default function PrivateNavbar() {
                   </button>
                 </div>
                 <div className="hidden md:ml-1 md:flex md:flex-shrink-0 md:items-center">
-                  {/* Profile dropdown */}
+                
                   <Menu as="div" className="relative ml-1">
                     <div>
                       <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -148,7 +148,7 @@ export default function PrivateNavbar() {
               </div>
             </div>
           </div>
-          {/* Mobile Navs  private links*/}
+        
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 pb-3 pt-2">
               <Link to="/">
@@ -200,12 +200,12 @@ export default function PrivateNavbar() {
                 </Disclosure.Button>
               </Link>
             </div>
-            {/* Profile links */}
+          
             <div className="border-t border-gray-700 pb-3 pt-4">
               <div className="mt-3 space-y-1">
                 <Disclosure.Button
                   as="button"
-                  // onClick={logoutHandler}
+            
                   className="block px-4 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-gray-200 sm:px-6"
                 >
                   Sign out
