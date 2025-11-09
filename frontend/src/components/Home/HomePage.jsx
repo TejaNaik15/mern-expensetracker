@@ -10,7 +10,7 @@ import {
 import { IoIosStats } from "react-icons/io";
 import { FaFilter } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import Footer from "./Footer"; // <-- Import Footer component
+import Footer from "./Footer"; 
 
 const HomePage = () => {
   return (
@@ -45,7 +45,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* How it works */}
+      
       <div className="py-20 px-4">
         <h2 className="text-3xl font-bold text-center text-gray-200">
           How It Works
@@ -75,7 +75,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Testimonials */}
+  
       <div className="py-20 px-4">
         <h2 className="text-3xl font-bold text-center text-gray-200">
           What Our Users Say
@@ -100,7 +100,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Final CTA */}
+      
       <div className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-200">
@@ -117,7 +117,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Footer Section */}
+      
       <Footer />
     </>
   );
