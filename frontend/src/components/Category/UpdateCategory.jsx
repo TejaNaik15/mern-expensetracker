@@ -52,7 +52,7 @@ const UpdateCategory = () => {
         </h2>
         <p className="text-gray-600">Fill in the details below.</p>
       </div>
-      {/* Display alert message */}
+      
       {isError && (
         <AlertMessage
           type="error"
@@ -109,7 +109,7 @@ const UpdateCategory = () => {
         )}
       </div>
 
-      {/* Submit Button */}
+    
       <button
         type="submit"
         className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-200 transform"
