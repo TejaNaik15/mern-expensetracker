@@ -29,16 +29,19 @@ app.use("/api/v1/transactions", transactionRouter);
 // Error handler middleware
 app.use(errorHandler);
 
-const server = () => {
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
+const server = async () => {
+  try {
+    // Connect to database BEFORE starting server
+    await connectDB();
     
-    // Connect to database after server starts
-    connectDB().catch(error => {
-      console.log("❌ Database connection failed:", error.message);
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📡 API available at http://localhost:${PORT}/api/v1`);
     });
-  });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error.message);
+    process.exit(1);
+  }
 };
 
 server();

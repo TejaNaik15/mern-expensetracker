@@ -39,7 +39,7 @@ export const AuroraHero = ({ children }) => {
           <Stars radius={50} count={2500} factor={4} fade speed={2} />
         </Canvas>
       </div>
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10 min-h-screen pt-16">
         {children}
       </div>
     </motion.section>

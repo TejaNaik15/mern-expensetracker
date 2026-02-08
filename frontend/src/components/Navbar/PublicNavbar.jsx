@@ -10,11 +10,11 @@ import { FaBlog } from "react-icons/fa";
 
 export default function PublicNavbar() {
   return (
-    <Disclosure as="nav" className="fixed w-full z-50 top-0">
+    <Disclosure as="nav" className="fixed w-full z-50 top-0 bg-gray-900/95 border-b border-gray-700">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 justify-between">
+            <div className="flex h-16 justify-between items-center">
               <div className="flex">
                 <div className="-ml-2 mr-2 flex items-center md:hidden">
                 
@@ -73,12 +73,12 @@ export default function PublicNavbar() {
             </div>
           </div>
 
-          <Disclosure.Panel className="md:hidden">
-            <div className="space-y-1 pb-3 pt-2">
+          <Disclosure.Panel className="md:hidden bg-gray-900/95 border-t border-gray-700">
+            <div className="space-y-1 pb-3 pt-2 px-4">
               <Link to="/">
-                <Disclosure.Button
+                  <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   ExpenseMate
                 </Disclosure.Button>
@@ -87,7 +87,7 @@ export default function PublicNavbar() {
               <Link to="/register">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Register
                 </Disclosure.Button>
@@ -95,7 +95,7 @@ export default function PublicNavbar() {
               <Link to="/login">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Login
                 </Disclosure.Button>

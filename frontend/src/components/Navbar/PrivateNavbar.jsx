@@ -22,12 +22,12 @@ export default function PrivateNavbar() {
   };
 
   return (
-    <Disclosure as="nav" className="fixed w-full z-50 top-0">
+    <Disclosure as="nav" className="fixed w-full z-50 top-0 bg-gray-900/95 border-b border-gray-700">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex h-16 justify-start items-center">
-              <div className="flex justify-center flex-row w-full">
+              <div className="flex justify-center flex-row w-full items-center">
                 <div className="-ml-2 mr-2 flex items-left md:hidden">
                 
                   <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -149,20 +149,20 @@ export default function PrivateNavbar() {
             </div>
           </div>
         
-          <Disclosure.Panel className="md:hidden">
-            <div className="space-y-1 pb-3 pt-2">
+          <Disclosure.Panel className="md:hidden bg-gray-900/95 border-t border-gray-700">
+            <div className="space-y-1 pb-3 pt-2 px-4">
               <Link to="/">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
-                  MasyncTracker
+                  ExpenseMate
                 </Disclosure.Button>
               </Link>
               <Link to="/add-transaction">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Add Transaction
                 </Disclosure.Button>
@@ -170,7 +170,7 @@ export default function PrivateNavbar() {
               <Link to="/add-category">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Add Category
                 </Disclosure.Button>
@@ -178,7 +178,7 @@ export default function PrivateNavbar() {
               <Link to="/categories">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Categories
                 </Disclosure.Button>
@@ -186,7 +186,7 @@ export default function PrivateNavbar() {
               <Link to="/profile">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   Profile
                 </Disclosure.Button>
@@ -194,14 +194,14 @@ export default function PrivateNavbar() {
               <Link to="/dashboard">
                 <Disclosure.Button
                   as="button"
-                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-400 hover:border-gray-300 hover:bg-gray-700 hover:text-gray-200 sm:pl-5 sm:pr-6"
+                  className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-200 hover:border-gray-300 hover:bg-gray-800 hover:text-gray-100 sm:pl-5 sm:pr-6"
                 >
                   My Dashboard
                 </Disclosure.Button>
               </Link>
             </div>
           
-            <div className="border-t border-gray-700 pb-3 pt-4">
+            <div className="border-t border-gray-700 pb-3 pt-4 px-4">
               <div className="mt-3 space-y-1">
                 <Disclosure.Button
                   as="button"
