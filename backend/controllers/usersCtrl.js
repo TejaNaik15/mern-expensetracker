@@ -2,7 +2,35 @@ const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
+const Category = require("../model/Category");
 const { isConnected } = require("../db");
+
+// Default categories for new users
+const DEFAULT_CATEGORIES = {
+  expense: [
+    "Home Rent",
+    "Bills",
+    "Transportation",
+    "Shopping",
+    "Groceries",
+    "Entertainment",
+    "Dining",
+    "Healthcare",
+    "Insurance",
+    "Education",
+    "Utilities",
+    "Mobile",
+  ],
+  income: [
+    "Salary",
+    "Freelance",
+    "Bonus",
+    "Investment",
+    "Gift",
+    "Refund",
+    "Other Income",
+  ],
+};
 
 const usersController = {
   
@@ -33,6 +61,21 @@ const usersController = {
         username,
         password: hashedPassword,
       });
+      
+      // Create default categories for new user
+      const expenseCategories = DEFAULT_CATEGORIES.expense.map((name) => ({
+        user: userCreated._id,
+        name: name.toLowerCase(),
+        type: "expense",
+      }));
+      
+      const incomeCategories = DEFAULT_CATEGORIES.income.map((name) => ({
+        user: userCreated._id,
+        name: name.toLowerCase(),
+        type: "income",
+      }));
+      
+      await Category.insertMany([...expenseCategories, ...incomeCategories]);
       
       res.status(201).json({
         message: "User registered successfully",

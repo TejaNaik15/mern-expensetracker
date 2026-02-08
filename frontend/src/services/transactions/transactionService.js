@@ -2,8 +2,6 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/url";
 import { getUserFromStorage } from "../../utils/getUserFromStorage";
 
-//! Get the token
-const token = getUserFromStorage();
 //! Add
 export const addTransactionAPI = async ({
   type,
@@ -12,6 +10,7 @@ export const addTransactionAPI = async ({
   description,
   amount,
 }) => {
+  const token = getUserFromStorage();
   const response = await axios.post(
     `${BASE_URL}/transactions/create`,
     {
@@ -32,6 +31,7 @@ export const addTransactionAPI = async ({
 };
 //! update
 export const updateCategoryAPI = async ({ name, type, id }) => {
+  const token = getUserFromStorage();
   const response = await axios.put(
     `${BASE_URL}/categories/update/${id}`,
     {
@@ -49,6 +49,7 @@ export const updateCategoryAPI = async ({ name, type, id }) => {
 };
 //! delete
 export const deleteCategoryAPI = async (id) => {
+  const token = getUserFromStorage();
   const response = await axios.delete(`${BASE_URL}/categories/delete/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -64,6 +65,7 @@ export const listTransactionsAPI = async ({
   startDate,
   endDate,
 }) => {
+  const token = getUserFromStorage();
   const response = await axios.get(`${BASE_URL}/transactions/lists`, {
     params: { category, endDate, startDate, type },
     headers: {
