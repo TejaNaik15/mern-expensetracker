@@ -264,7 +264,48 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## Advanced — Deployment & Production Notes
+
+This section provides practical, production-ready guidance for deploying the application, securing infrastructure, and automating release pipelines.
+
+### Quick production checklist
+- Use a hosted MongoDB (Atlas) with a dedicated user and password.
+- Restrict Atlas network access to deployment platform IPs.
+- Set strong `JWT_SECRET` and never commit secrets to the repo.
+- Enable HTTPS on the frontend and backend (Render provides TLS by default).
+- Configure environment variables in the deployment platform: `MONGO_URI`, `JWT_SECRET`, `NODE_ENV=production`, `FRONTEND_URL`.
+
+### Render-specific notes
+- Frontend (Static Site)
+  - Root: `frontend`
+  - Build command: `npm ci && npm run build`
+  - Publish directory: `dist`
+  - Env: `VITE_API_URL=https://<your-backend>/api/v1`
+
+- Backend (Web Service)
+  - Root: `backend`
+  - Build command: `npm ci`
+  - Start command: `npm start`
+  - Required envs: `MONGO_URI`, `JWT_SECRET`, `NODE_ENV=production`, `FRONTEND_URL` (for CORS)
+
+### CI/CD & health checks
+- Add a CI pipeline to run `npm test` / `npm run lint` before deploys.
+- Add a `/api/v1/test` health endpoint (already present) and configure readiness probes where supported.
+- Monitor logs and add alerting (Sentry/LogDNA) for uncaught exceptions.
+
+### Security & scaling
+- Use a rotating secret management system for production secrets.
+- Use dedicated database users with least privileges.
+- Add rate-limiting and input validation to public endpoints.
+- For scale, consider containerizing backend and using managed DB with proper indexes.
+
+## Support & contact
+If you need deployment help or want a walkthrough, open an issue or contact me via my portfolio:
+
+- Portfolio: https://teja-portfolio-yrei.vercel.app/
+- Live demo: https://mern-expensetracker-frontend-51n5.onrender.com/
+
 <div align="center">
-  <p>Made with ❤️ by Teja Naik</p>
+  <p>Made with ❤️ by <a href="https://teja-portfolio-yrei.vercel.app/">Teja Naik</a></p>
   <p>⭐ Star this repository if you found it helpful!</p>
 </div>
