@@ -14,7 +14,9 @@ const PORT = process.env.PORT || 8000;
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+// Allow requests from the frontend URL provided via env (use '*' as fallback)
+const FRONTEND_URL = process.env.FRONTEND_URL || '*';
+app.use(cors({ origin: FRONTEND_URL }));
 
 // Test route
 app.get("/api/v1/test", (req, res) => {
