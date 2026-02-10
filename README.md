@@ -12,6 +12,7 @@
 <p align="center">
   A full-stack personal expense tracking application built with the MERN stack featuring a stunning aurora-themed dark UI and comprehensive financial management capabilities.
 </p>
+**Live Demo:** https://mern-expensetracker-frontend-51n5.onrender.com/
 
 ## 🌟 Features
 
@@ -252,9 +253,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Teja Naik**
 - GitHub: [@TejaNaik15](https://github.com/TejaNaik15)
 - LinkedIn: [Teja Naik](https://www.linkedin.com/in/teja-naik-0b3021282/)
+**Portfolio:** https://teja-portfolio-yrei.vercel.app/
 
 ## 🙏 Acknowledgments
-
+   <p>Made with ❤️ by <a href="https://teja-portfolio-yrei.vercel.app/">Teja Naik</a></p>
 - **React Team** for the amazing React 19 features
 - **MongoDB** for the robust database solution
 - **Tailwind CSS** for the utility-first CSS framework
