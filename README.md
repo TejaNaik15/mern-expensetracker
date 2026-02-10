@@ -12,6 +12,11 @@
 <p align="center">
   A full-stack personal expense tracking application built with the MERN stack featuring a stunning aurora-themed dark UI and comprehensive financial management capabilities.
 </p>
+
+<div align="center">
+  <img src="./assets/demo-banner.png" alt="Expense Mate Demo" width="100%" style="max-width: 900px; border-radius: 10px; margin: 20px 0;">
+</div>
+
 **Live Demo:** https://mern-expensetracker-frontend-51n5.onrender.com/
 
 ## 🌟 Features
